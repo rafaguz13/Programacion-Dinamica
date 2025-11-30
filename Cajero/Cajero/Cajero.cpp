@@ -15,16 +15,11 @@ Cuenta cuenta4 = { 4, "Nubia","conejo", 6325.0};
 Cuenta cuenta;
 
 void cambiar(int &a, int &b) {
-    int c = a;
-    a = b;
-    b = c;
+
 }
 
 void saldo(cuenta &c) {
-    int x = 10;
-    int y = 5;
-    cambiar(x, y);
-    cambiar(5, 10);
+
 }
 
 void depositar(double monto) {
