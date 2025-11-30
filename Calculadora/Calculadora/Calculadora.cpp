@@ -1,7 +1,8 @@
 #include <iostream>
 #include <cmath>   // Librería para pow() y sqrt()
 using namespace std;
-
+//Profe en este codigo y en la actividad de la tienda no hice cambios en git, solo es uno ya que cuando los realice estaba fuera de la ciudad y no tenia internet, entonces los iba realizando pero 
+// no podia subir los cambios al git, hasta hoy que llegue de nuevo a casa solamente los subi pero ya completos
 // Función para calcular el factorial de un número entero
 long long factorial(int n) {
     if (n < 0) {
