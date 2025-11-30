@@ -1,19 +1,30 @@
 #include <iostream>
 using namespace std;
 
-struct cuenta {
+struct Cuenta {
     int numero;
-    string nombre, password;
+    string nombre, contra;
     double saldo;
 };
 
-cuenta cuenta1 = { 1, "Rafael","patito", 100000.0};
-cuenta cuenta2 = { 2, "Cesar","gato", 12000.0};
-cuenta cuenta3 = { 3, "Manuel","perro", 700.0};
-cuenta cuenta4 = { 4, "Nubia","conejo", 6325.0};
+Cuenta cuenta1 = { 1, "Rafael","patito", 100000.0};
+Cuenta cuenta2 = { 2, "Cesar","gato", 12000.0};
+Cuenta cuenta3 = { 3, "Manuel","perro", 700.0};
+Cuenta cuenta4 = { 4, "Nubia","conejo", 6325.0};
+
+Cuenta cuenta;
+
+void cambiar(int &a, int &b) {
+    int c = a;
+    a = b;
+    b = c;
+}
 
 void saldo(cuenta &c) {
-
+    int x = 10;
+    int y = 5;
+    cambiar(x, y);
+    cambiar(5, 10);
 }
 
 void depositar(double monto) {
@@ -49,10 +60,14 @@ int menu() {
 
 int inicio() {
     //Aqui ira el inicio de sesion para saber con que cuenta se trabajara
-
+    string user, contra;
     cout << "\n--- Cajero Automatico ---\n";
     cout << "Ingrese su nombre de usuario (Recuerde que la primer letra siempre es mayuscula)\n";
-
+    cin >> user;
+    if (cuenta1.nombre == user)
+        cuenta = cuenta1;
+    if (cuenta2.nombre == user)
+        cuenta = cuenta2;
 }
 
 int main()
