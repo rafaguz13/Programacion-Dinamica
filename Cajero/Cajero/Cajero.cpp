@@ -2,30 +2,37 @@
 #include <string>
 using namespace std;
 
+// Definimos un struct llamado Cuenta que representa una cuenta bancaria
+// con número de cuenta, nombre del titular, contraseña y saldo disponible.
 struct Cuenta {
     int numero;
     string nombre, contra;
     double saldo;
 };
 
-// Cuentas disponibles
+// Cuentas disponibles en el sistema (simulación de base de datos)
 Cuenta cuenta1 = { 1, "Rafael","patito", 100000.0 };
 Cuenta cuenta2 = { 2, "Cesar","gato", 12000.0 };
 Cuenta cuenta3 = { 3, "Manuel","perro", 700.0 };
 Cuenta cuenta4 = { 4, "Nubia","conejo", 6325.0 };
 
-// Cuenta activa
+// Variable global que almacenará la cuenta activa (la que inicia sesión)
 Cuenta cuenta;
 
+// ---------------- FUNCIONES DE OPERACIONES ----------------
+
+// Consultar saldo de la cuenta activa
 void saldo(Cuenta& c) {
     cout << "Saldo actual de " << c.nombre << ": $" << c.saldo << endl;
 }
 
+// Depositar dinero en la cuenta activa
 void depositar(Cuenta& c, double monto) {
     c.saldo += monto;
     cout << "Deposito exitoso. Nuevo saldo: $" << c.saldo << endl;
 }
 
+// Retirar dinero de la cuenta activa
 void retirar(Cuenta& c, double monto) {
     if (monto <= c.saldo) {
         c.saldo -= monto;
@@ -36,6 +43,7 @@ void retirar(Cuenta& c, double monto) {
     }
 }
 
+// Transferir dinero de una cuenta origen a una cuenta destino
 void transferir(Cuenta& origen, Cuenta& destino, double monto) {
     if (monto <= origen.saldo) {
         origen.saldo -= monto;
@@ -48,6 +56,9 @@ void transferir(Cuenta& origen, Cuenta& destino, double monto) {
     }
 }
 
+// ---------------- MENÚ PRINCIPAL ----------------
+
+// Muestra el menú de opciones y valida la entrada del usuario
 int menu() {
     int opc;
     while (true) {
@@ -63,10 +74,13 @@ int menu() {
         if (opc > 5 || opc < 1)
             cout << "Opcion invalida \n";
         else
-            return opc;
+            return opc; // Devuelve la opción válida
     }
 }
 
+// ---------------- INICIO DE SESIÓN ----------------
+
+// Solicita usuario y contraseña hasta que sean correctos
 void inicio() {
     string user, pass;
     bool valido = false;
@@ -79,6 +93,7 @@ void inicio() {
         cout << "Contraseña: ";
         cin >> pass;
 
+        // Validación de credenciales contra las cuentas disponibles
         if (cuenta1.nombre == user && cuenta1.contra == pass) {
             cuenta = cuenta1;
             valido = true;
@@ -103,40 +118,41 @@ void inicio() {
     cout << "Inicio de sesion exitoso. Bienvenido " << cuenta.nombre << "!\n";
 }
 
+// ---------------- PROGRAMA PRINCIPAL ----------------
 
 int main() {
     inicio(); // Primero iniciar sesión
 
     int opcion;
     do {
-        opcion = menu();
+        opcion = menu(); // Mostrar menú y obtener opción
         double monto;
         switch (opcion) {
-        case 1:
+        case 1: // Consultar saldo
             saldo(cuenta);
             break;
-        case 2:
+        case 2: // Depositar
             cout << "Ingrese monto a depositar: ";
             cin >> monto;
             depositar(cuenta, monto);
             break;
-        case 3:
+        case 3: // Retirar
             cout << "Ingrese monto a retirar: ";
             cin >> monto;
             retirar(cuenta, monto);
             break;
-        case 4:
+        case 4: // Transferir (ejemplo fijo a Cesar)
             cout << "Ingrese monto a transferir: ";
             cin >> monto;
-            transferir(cuenta, cuenta2, monto); // ejemplo: transferir a Cesar
+            transferir(cuenta, cuenta2, monto);
             break;
-        case 5:
+        case 5: // Salir
             cout << "Gracias por usar el cajero." << endl;
             break;
         default:
             cout << "Opcion invalida." << endl;
         }
-    } while (opcion != 5);
+    } while (opcion != 5); // Repite hasta que el usuario elija salir
 
     return 0;
 }
